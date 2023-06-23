@@ -1,0 +1,94 @@
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body .remove-button {
+  display: flex;
+  justify-content: center;
+}
+
+.card-body .remove-button button {
+  background-color: #e64141;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 2%;
+}
+
+.card-body .remove-button button:hover {
+  background-color: darkred;
+}
+
+.card-body .form-groupcod label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+}
+
+.form-group {
+  margin-bottom: 2%;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.form-group label {
+  color: #61a6ab;
+  font-weight: bold;
+}
+
+.form-group:nth-of-type(1) {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 5px 0;
+}
+
+.form-group:nth-of-type(1) span {
+  margin-left: 5px;
+}
+
+.shoppincart-modal-remove-item {
+  border: 3px solid #61a6ab;
+  border-radius: 20px;
+  padding: 0;
+}
+
+.shoppincart-modal-remove-item p {
+  font-size: 18px;
+  padding: 20px 0;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.shoppincart-modal-remove-item button {
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 2%;
+  cursor: pointer;
+  width: 46%;
+  max-width: 200px;
+  margin: 0 5px;
+}
+
+.shoppincart-modal-remove-item .buttons-box button:nth-of-type(1) {
+  background-color: #e64141;
+}
+
+.shoppincart-modal-remove-item .buttons-box button:nth-of-type(2) {
+  background-color: #69b655;
+}
+
+.shoppincart-modal-remove-item .buttons-box button:nth-of-type(1):hover {
+  background-color: darkred;
+}
+
+.shoppincart-modal-remove-item .buttons-box button:nth-of-type(2):hover {
+  background-color: #3b6835;
+}
