@@ -12,7 +12,7 @@ import React from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import logoIcon from "./assets/images/logo-icon.png";
-import logo from "./assets/svg/logo.svg";
+import logo from "./assets/images/logo-horizontal.png";
 
 function App() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function App() {
   const [collapsed, setCollapsed] = React.useState(false);
 
   React.useEffect(() => {
-    navigate("/produtos");
+    navigate("/login");
   }, []);
 
   return (
@@ -30,7 +30,7 @@ function App() {
         collapsible
         collapsed={collapsed}
         style={{
-          background: "#61A6AB",
+          background: "#637566",
         }}
       >
         <div className="demo-logo-vertical">
@@ -46,7 +46,7 @@ function App() {
         </div>
         <Menu
           style={{
-            background: "#61A6AB",
+            background: "#637566",
             color: "#FFFFFF",
           }}
           mode="inline"

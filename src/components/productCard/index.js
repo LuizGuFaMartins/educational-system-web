@@ -1,14 +1,10 @@
 import { Modal } from "antd";
 import React from "react";
 import uuid from "react-uuid";
-import minus from "../../assets/svg/minus.svg";
-import plus from "../../assets/svg/plus.svg";
 
-import { io } from "socket.io-client";
 import "./styles.css";
 
 const ProductCard = ({ product, setDeleteId }) => {
-  const socket = React.useMemo(() => io("http://localhost:3333"), []);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [isBuyModalOpen, setIsBuyModalOpen] = React.useState(false);
   const [quantity, setQuantity] = React.useState(0);
@@ -44,7 +40,6 @@ const ProductCard = ({ product, setDeleteId }) => {
       product: product,
     };
 
-    socket.emit("createItem", item);
     setIsBuyModalOpen(false);
   };
 
@@ -115,27 +110,11 @@ const ProductCard = ({ product, setDeleteId }) => {
         >
           <p className="modal-text">Selecione a quantidade:</p>
           <div className="product-input-group">
-            <img
-              style={{ width: "50px", height: "45px" }}
-              src={minus}
-              alt="logo"
-              onClick={() => {
-                setQuantity((prev) => prev - 1);
-              }}
-            ></img>
             <input
               type="number"
               value={quantity}
               onChange={({ target }) => setQuantity(target.value)}
             />
-            <img
-              style={{ width: "50px", height: "45px" }}
-              src={plus}
-              alt="logo"
-              onClick={() => {
-                setQuantity((prev) => prev + 1);
-              }}
-            ></img>
           </div>
           <div style={{ marginTop: 20 }} className="buttons-box">
             <button onClick={handleCancelBuy}>Cancelar</button>
