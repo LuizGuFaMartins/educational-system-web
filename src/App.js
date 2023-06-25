@@ -11,8 +11,9 @@ import { Content, Header } from "antd/es/layout/layout";
 import React from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
-import logoIcon from "./assets/images/logo-icon.png";
 import logo from "./assets/images/logo-horizontal.png";
+import logoIcon from "./assets/images/logo-icon.png";
+import { isAuthenticated } from "./services/auth";
 
 function App() {
   const navigate = useNavigate();
@@ -20,7 +21,9 @@ function App() {
   const [collapsed, setCollapsed] = React.useState(false);
 
   React.useEffect(() => {
-    navigate("/login");
+    if (!isAuthenticated()) {
+      navigate("/login");
+    }
   }, []);
 
   return (
@@ -30,7 +33,7 @@ function App() {
         collapsible
         collapsed={collapsed}
         style={{
-          background: "#637566",
+          background: "#4d4d4d",
         }}
       >
         <div className="demo-logo-vertical">
@@ -46,7 +49,7 @@ function App() {
         </div>
         <Menu
           style={{
-            background: "#637566",
+            background: "#4d4d4d",
             color: "#FFFFFF",
           }}
           mode="inline"
@@ -77,7 +80,7 @@ function App() {
         <Header
           style={{
             padding: 0,
-            background: "#ACCEC0",
+            background: "#637566",
             display: "flex",
             alignContent: "center",
           }}

@@ -10,7 +10,7 @@
 .login-box {
   width: 400px;
   height: 400px;
-  background-color: #637566;
+  background-color: #4d4d4d;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,6 +47,7 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
+  position: relative;
 }
 
 .login-form-group:nth-of-type(2) {
@@ -64,4 +65,11 @@
 
 .login-form-group input:focus {
   outline: none;
+}
+
+.login-form-group .error {
+  color: red;
+  position: absolute;
+  left: 10px;
+  bottom: -6px;
 }

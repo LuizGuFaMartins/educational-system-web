@@ -1,14 +1,19 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo-vertical.png";
+import api from "../../services/api";
+import { login } from "../../services/auth";
 import "./styles.css";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPassword, setErrorPassword] = useState("");
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -18,15 +23,31 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Realizar a validação dos dados inseridos
-    if (username === "admin" && password === "password") {
-      setError("");
-      // Lógica para lidar com o login bem-sucedido
-      console.log("Login bem-sucedido!");
-    } else {
-      setError("Nome de usuário ou senha inválidos");
+    if (isFormValid()) {
+      api
+        .post(`/login`, {
+          loginEmail: email,
+          loginPassword: password,
+        })
+        .then((res) => {
+          login(res.data.accessToken);
+          navigate("/");
+        })
+        .catch((error) => console.log(error));
     }
   };
+
+  function isFormValid() {
+    setErrorEmail("");
+    setErrorPassword("");
+
+    if (email === "") {
+      setErrorEmail("E-mail inválido");
+    }
+    if (password === "") {
+      setErrorPassword("Senha inválida");
+    }
+  }
 
   return (
     <div className="login-container">
@@ -34,13 +55,14 @@ const Login = () => {
         <img src={logo} alt="logo"></img>
         <form onSubmit={handleSubmit}>
           <div className="login-form-group">
-            <label htmlFor="username">Nome de usuário:</label>
+            <label htmlFor="email">Nome de usuário:</label>
             <input
               type="text"
-              id="username"
-              value={username}
-              onChange={handleUsernameChange}
+              id="email"
+              value={email}
+              onChange={handleEmailChange}
             />
+            {errorEmail && <small className="error">{errorEmail}</small>}
           </div>
           <div className="login-form-group">
             <label htmlFor="password">Senha:</label>
@@ -50,9 +72,9 @@ const Login = () => {
               value={password}
               onChange={handlePasswordChange}
             />
+            {errorPassword && <small className="error">{errorPassword}</small>}
           </div>
           <button type="submit">Entrar</button>
-          {/* {error && <p>{error}</p>} */}
         </form>
       </div>
     </div>
