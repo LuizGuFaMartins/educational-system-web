@@ -10,6 +10,7 @@ import Sider from "antd/es/layout/Sider";
 import { Content, Header } from "antd/es/layout/layout";
 import React from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import logo from "./assets/images/logo-horizontal.png";
 import logoIcon from "./assets/images/logo-icon.png";
@@ -58,14 +59,14 @@ function App() {
             {
               key: "1",
               icon: <ShopOutlined />,
-              label: "Produtos",
-              onClick: () => navigate("/produtos"),
+              label: "Turmas",
+              onClick: () => navigate("/turmas"),
             },
             {
               key: "2",
               icon: <PlusCircleOutlined />,
               label: "Cadastrar",
-              onClick: () => navigate("/cadastro"),
+              onClick: () => navigate("/atividades"),
             },
             {
               key: "3",
@@ -98,10 +99,12 @@ function App() {
           />
           <div className="header-label">
             <h2>
-              {location.pathname.includes("/produtos")
-                ? "Produtos"
-                : location.pathname.includes("/cadastro")
-                ? "Cadastro"
+              {location.pathname.includes("/turmas")
+                ? "Turmas"
+                : location.pathname.includes("/atividades")
+                ? "Atividades"
+                : location.pathname.includes("/disciplinas")
+                ? "Disciplinas"
                 : location.pathname.includes("/carrinho")
                 ? "Carrinho"
                 : ""}
