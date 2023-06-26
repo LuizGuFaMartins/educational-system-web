@@ -4,19 +4,21 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import CreateAccount from "../pages/createAccount";
 import Login from "../pages/login";
-import Product from "../pages/products";
+import Profile from "../pages/profile";
 import RegisterProduct from "../pages/registerProduct";
 import ShoppingCart from "../pages/shoppingCart";
+import Subject from "../pages/subjects";
 
 const Routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "/turmas", element: <Product /> },
+      { path: "/turmas", element: <Subject /> },
       { path: "/atividades", element: <RegisterProduct /> },
-      { path: "/disciplinas", element: <RegisterProduct /> },
+      { path: "/disciplinas", element: <Subject /> },
       { path: "/carrinho", element: <ShoppingCart /> },
+      { path: "/perfil", element: <Profile /> },
     ],
   },
   {

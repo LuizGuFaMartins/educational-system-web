@@ -4,6 +4,7 @@ import {
   PlusCircleOutlined,
   ShopOutlined,
   ShoppingCartOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
@@ -59,20 +60,32 @@ function App() {
             {
               key: "1",
               icon: <ShopOutlined />,
+              label: "Disciplinas",
+              onClick: () => navigate("/disciplinas"),
+            },
+            {
+              key: "2",
+              icon: <ShopOutlined />,
               label: "Turmas",
               onClick: () => navigate("/turmas"),
             },
             {
-              key: "2",
+              key: "3",
               icon: <PlusCircleOutlined />,
               label: "Cadastrar",
               onClick: () => navigate("/atividades"),
             },
             {
-              key: "3",
+              key: "4",
               icon: <ShoppingCartOutlined />,
               label: "Carrinho",
               onClick: () => navigate("/carrinho"),
+            },
+            {
+              key: "5",
+              icon: <UserOutlined />,
+              label: "Perfil",
+              onClick: () => navigate("/perfil"),
             },
           ]}
         />

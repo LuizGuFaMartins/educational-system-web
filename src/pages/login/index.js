@@ -38,6 +38,7 @@ const Login = () => {
         })
         .then((res) => {
           login(res?.data?.accessToken);
+          localStorage.setItem("loginId", res.data.loginId);
           toast.success("Login efetuado com sucesso");
           navigate("/");
         })
