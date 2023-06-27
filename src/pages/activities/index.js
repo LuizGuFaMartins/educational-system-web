@@ -5,7 +5,7 @@ import api from "../../services/api";
 import { logout } from "../../services/auth";
 import "./styles.css";
 
-const Subject = () => {
+const Activity = () => {
   const navigate = useNavigate();
   const [subjects, setSubjects] = React.useState([]);
   const [filteredSubjects, setFilteredSubjects] = React.useState([]);
@@ -63,7 +63,7 @@ const Subject = () => {
             value={search}
             onChange={({ target }) => onSearch(target.value)}
             type="text"
-            placeholder="Buscar por nome da disciplina..."
+            placeholder="Buscar por nome da atividade..."
           />
           <div className="glass"></div>
         </div>
@@ -80,4 +80,4 @@ const Subject = () => {
   );
 };
 
-export default Subject;
+export default Activity;

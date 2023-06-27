@@ -25,8 +25,6 @@ axios.interceptors.request.use(
     console.log("interceptor error: ", error);
 
     if (error && error.response.status === 401) {
-      // const navigate = useNavigate();
-      // navigate("/login");
       window.location = "/login";
       logout();
       return error;
@@ -44,9 +42,7 @@ axios.interceptors.response.use(
   function (error) {
     console.log("interceptor error: ", error);
 
-    if (error && error.response.status === 401) {
-      // const navigate = useNavigate();
-      // navigate("/login");
+    if (error && error.response.status === 401) {      
       window.location = "/login";
       logout();
       return error;

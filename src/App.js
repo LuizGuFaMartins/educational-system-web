@@ -1,10 +1,12 @@
 import {
+  CiCircleOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PlusCircleOutlined,
   ShopOutlined,
   ShoppingCartOutlined,
-  UserOutlined
+  UserOutlined,
+  PaperClipOutlined
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
@@ -15,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import logo from "./assets/images/logo-horizontal.png";
 import logoIcon from "./assets/images/logo-icon.png";
-import { isAuthenticated } from "./services/auth";
+import { isAuthenticated, logout } from "./services/auth";
 
 function App() {
   const navigate = useNavigate();
@@ -25,6 +27,8 @@ function App() {
   React.useEffect(() => {
     if (!isAuthenticated()) {
       navigate("/login");
+    } else {
+      navigate("/disciplinas");
     }
   }, []);
 
@@ -65,27 +69,42 @@ function App() {
             },
             {
               key: "2",
+              icon: <PaperClipOutlined />,
+              label: "Atividades",
+              onClick: () => navigate("/atividades"),
+            },
+            {
+              key: "3",
               icon: <ShopOutlined />,
               label: "Turmas",
               onClick: () => navigate("/turmas"),
             },
             {
-              key: "3",
+              key: "4",
               icon: <PlusCircleOutlined />,
               label: "Cadastrar",
               onClick: () => navigate("/atividades"),
             },
             {
-              key: "4",
+              key: "5",
               icon: <ShoppingCartOutlined />,
               label: "Carrinho",
               onClick: () => navigate("/carrinho"),
             },
             {
-              key: "5",
+              key: "6",
               icon: <UserOutlined />,
               label: "Perfil",
               onClick: () => navigate("/perfil"),
+            },
+            {
+              key: "7",
+              icon: <CiCircleOutlined />,
+              label: "Sair",
+              onClick: () => {
+                logout();
+                navigate("/login");
+              },
             },
           ]}
         />
