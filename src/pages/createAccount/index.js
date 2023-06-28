@@ -57,11 +57,11 @@ const CreateAccount = () => {
     if (isFormValid()) {
       api
         .post(`/students`, {
-          studentName: name,
-          studentBirthday: birthday,
-          studentPhoneNumber: phone,
-          loginEmail: email,
-          loginPassword: password,
+          student_name: name,
+          student_birthday: birthday,
+          student_phone_number: phone,
+          login_email: email,
+          login_password: password,
         })
         .then((res) => {
           toast.success("Usuário cadastrado com sucesso");

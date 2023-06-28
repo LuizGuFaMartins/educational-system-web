@@ -2,11 +2,10 @@ import {
   CiCircleOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  PaperClipOutlined,
   PlusCircleOutlined,
   ShopOutlined,
-  ShoppingCartOutlined,
   UserOutlined,
-  PaperClipOutlined
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
@@ -23,6 +22,72 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [collapsed, setCollapsed] = React.useState(false);
+
+  const teacherRoutes = [
+    {
+      key: "1",
+      icon: <ShopOutlined />,
+      label: "Turmas",
+      onClick: () => navigate("/turmas"),
+    },
+    {
+      key: "2",
+      icon: <PlusCircleOutlined />,
+      label: "Cadastrar atividade",
+      onClick: () => navigate("/atividades"),
+    },
+    {
+      key: "3",
+      icon: <UserOutlined />,
+      label: "Perfil",
+      onClick: () => navigate("/perfil"),
+    },
+    {
+      key: "4",
+      icon: <CiCircleOutlined />,
+      label: "Sair",
+      onClick: () => {
+        logout();
+        navigate("/login");
+      },
+    },
+  ];
+
+  const studentRoutes = [
+    {
+      key: "1",
+      icon: <ShopOutlined />,
+      label: "Disciplinas",
+      onClick: () => navigate("/disciplinas"),
+    },
+    {
+      key: "2",
+      icon: <ShopOutlined />,
+      label: "Matriculadas",
+      onClick: () => navigate("/matriculas"),
+    },
+    {
+      key: "3",
+      icon: <PaperClipOutlined />,
+      label: "Atividades",
+      onClick: () => navigate("/atividades"),
+    },
+    {
+      key: "4",
+      icon: <UserOutlined />,
+      label: "Perfil",
+      onClick: () => navigate("/perfil"),
+    },
+    {
+      key: "5",
+      icon: <CiCircleOutlined />,
+      label: "Sair",
+      onClick: () => {
+        logout();
+        navigate("/login");
+      },
+    },
+  ];
 
   React.useEffect(() => {
     if (!isAuthenticated()) {
@@ -60,53 +125,11 @@ function App() {
           }}
           mode="inline"
           defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <ShopOutlined />,
-              label: "Disciplinas",
-              onClick: () => navigate("/disciplinas"),
-            },
-            {
-              key: "2",
-              icon: <PaperClipOutlined />,
-              label: "Atividades",
-              onClick: () => navigate("/atividades"),
-            },
-            {
-              key: "3",
-              icon: <ShopOutlined />,
-              label: "Turmas",
-              onClick: () => navigate("/turmas"),
-            },
-            {
-              key: "4",
-              icon: <PlusCircleOutlined />,
-              label: "Cadastrar",
-              onClick: () => navigate("/atividades"),
-            },
-            {
-              key: "5",
-              icon: <ShoppingCartOutlined />,
-              label: "Carrinho",
-              onClick: () => navigate("/carrinho"),
-            },
-            {
-              key: "6",
-              icon: <UserOutlined />,
-              label: "Perfil",
-              onClick: () => navigate("/perfil"),
-            },
-            {
-              key: "7",
-              icon: <CiCircleOutlined />,
-              label: "Sair",
-              onClick: () => {
-                logout();
-                navigate("/login");
-              },
-            },
-          ]}
+          items={
+            process.env.REACT_APP_FLAVOR === "STUDENT"
+              ? studentRoutes
+              : teacherRoutes
+          }
         />
       </Sider>
       <Layout>

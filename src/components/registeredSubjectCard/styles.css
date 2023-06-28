@@ -20,12 +20,12 @@
   min-width: 140px;
 }
 
-.btn-subject-card {
-  background-color: #d3cb09;
+.btn-registered-subject {
+  background-color: #e64141;
 }
 
-.btn-subject-card:hover {
-  background-color: #5e5b03;
+.btn-registered-subject:hover {
+  background-color: darkred;
 }
 
 .card-body .form-groupcod label {

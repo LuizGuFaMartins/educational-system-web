@@ -3,7 +3,7 @@ import React from "react";
 
 import "./styles.css";
 
-const SubjectCard = ({ subject, setDeleteId }) => {
+const RegisteredSubjectCard = ({ subject, setDeleteId }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [isBuyModalOpen, setIsBuyModalOpen] = React.useState(false);
   const [quantity, setQuantity] = React.useState(0);
@@ -40,8 +40,8 @@ const SubjectCard = ({ subject, setDeleteId }) => {
         <span>{subject?.teacher.teacher_name}</span>
       </div>
       <div className="buttons-box">
-        <button type="primary" onClick={showModal} className="btn-subject-card">
-          Fazer matrícula
+        <button type="primary" onClick={showModal} className="btn-registered-subject">
+          Cancelar matrícula
         </button>
         <Modal
           title={null}
@@ -58,11 +58,15 @@ const SubjectCard = ({ subject, setDeleteId }) => {
           }}
         >
           <p className="modal-text">
-            Tem certeza que deseja realizar a matrícula na disciplina?
+            Tem certeza que deseja cancelar a matrícula na disciplina?
           </p>
+          <span className="modal-warning">
+            Aviso: se cancelar a matrícula, não poderá acessar a disciplina
+            novamente.
+          </span>
           <div style={{ marginTop: 20 }} className="buttons-box">
             <button onClick={handleCancel}>Voltar</button>
-            <button onClick={handleOk}>Realizar matrícula</button>
+            <button onClick={handleOk}>Cancelar matrícula</button>
           </div>
         </Modal>
       </div>
@@ -70,4 +74,4 @@ const SubjectCard = ({ subject, setDeleteId }) => {
   );
 };
 
-export default SubjectCard;
+export default RegisteredSubjectCard;
