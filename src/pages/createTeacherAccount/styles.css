@@ -1,0 +1,84 @@
+.create-teacher-account-container {
+  width: 100%;
+  height: 100vh;
+
+  color: white;
+  position: relative;
+  overflow: auto;
+}
+
+.create-account-box {
+  width: 400px;
+  margin: 30px auto;
+  background-color: #4d4d4d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.create-teacher-account-container .create-account-box form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.create-teacher-account-container .create-account-box form a {
+  text-decoration: none;
+}
+
+.create-teacher-account-container .create-account-box form a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.create-teacher-account-container .create-account-box form button {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  background-color: #0b0d5e;
+  color: white;
+  font-size: 18px;
+}
+
+.create-teacher-account-container img {
+  width: 150px;
+}
+
+.create-teacher-account-form-group {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  position: relative;
+}
+
+.create-teacher-account-form-group:nth-of-type(7) {
+  margin-bottom: 20px;
+}
+
+.create-teacher-account-form-group input {
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 10px;
+  font-size: 16px;
+  background-color: #f7f7f7;
+  color: #a4a4a4;
+}
+
+.create-teacher-account-form-group input:focus {
+  outline: none;
+}
+
+.create-teacher-account-form-group .error {
+  color: red;
+  position: absolute;
+  left: 10px;
+  bottom: -6px;
+}

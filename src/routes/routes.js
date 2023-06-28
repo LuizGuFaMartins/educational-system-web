@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Activity from "../pages/activities";
 import CreateAccount from "../pages/createAccount";
+import CreateTeacherAccount from "../pages/createTeacherAccount";
 import Login from "../pages/login";
 import Profile from "../pages/profile";
 import RegisteredSubject from "../pages/registeredSubjects";
@@ -29,7 +30,12 @@ const Routes = createBrowserRouter([
   },
   {
     path: "/cadastro",
-    element: <CreateAccount />,
+    element:
+      process.env.REACT_APP_FLAVOR === "STUDENT" ? (
+        <CreateAccount />
+      ) : (
+        <CreateTeacherAccount />
+      ),
   },
 ]);
 
