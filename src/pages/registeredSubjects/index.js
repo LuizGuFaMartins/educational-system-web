@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import RegisteredSubjectCard from "../../components/registeredSubjectCard";
+import DoughnutChart from "../../doughnut";
 import api from "../../services/api";
 import { logout } from "../../services/auth";
 import "./styles.css";
@@ -69,6 +70,7 @@ const RegisteredSubject = () => {
 
   return (
     <>
+      <DoughnutChart />
       <div className="product-container">
         <div className="search-bar">
           <input
