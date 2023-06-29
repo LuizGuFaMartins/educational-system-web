@@ -1,4 +1,5 @@
 import { CategoryScale, Chart } from "chart.js/auto";
+import jsPDF from "jspdf";
 import React, { useCallback, useRef } from "react";
 import { Doughnut } from "react-chartjs-2";
 
@@ -41,7 +42,8 @@ const DoughnutChart = ({
     ? chartStyle
     : {
         width: 500,
-        height: 500
+        height: 500,
+        backgroundColor: "white",
       };
 
   const chartButtonStyle = buttonStyle
@@ -57,16 +59,25 @@ const DoughnutChart = ({
       };
 
   const downloadChart = useCallback(() => {
-    const link = document.createElement("a");
-    link.download = "chart.png";
-    link.href = ref.current.toBase64Image();
-    link.click();
+    const canvas = document.getElementById("myChart");
+    const pdf = new jsPDF();
+
+    const imgData = canvas.toDataURL("image/jpeg", 1.0);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("chart.pdf");
   }, []);
 
   return (
     <div style={chartContainerStyle}>
       <div style={chartBoxStyle}>
-        <Doughnut data={data} />
+        <Doughnut
+          style={{ backgroundColor: "white" }}
+          id="myChart"
+          data={data}
+        />
       </div>
       <button style={chartButtonStyle} onClick={downloadChart}>
         Salvar gráfico
