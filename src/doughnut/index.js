@@ -1,6 +1,6 @@
 import { CategoryScale, Chart } from "chart.js/auto";
 import jsPDF from "jspdf";
-import React, { useCallback, useRef } from "react";
+import React, { useCallback } from "react";
 import { Doughnut } from "react-chartjs-2";
 
 Chart.register(CategoryScale);
@@ -9,25 +9,8 @@ const DoughnutChart = ({
   containerStyle = null,
   chartStyle = null,
   buttonStyle = null,
+  data = null,
 }) => {
-  const ref = useRef(null);
-
-  const data = {
-    labels: ["Red", "Blue", "Yellow"],
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [300, 50, 100],
-        backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)",
-        ],
-        hoverOffset: 4,
-      },
-    ],
-  };
-
   const chartContainerStyle = containerStyle
     ? containerStyle
     : {
@@ -72,13 +55,15 @@ const DoughnutChart = ({
 
   return (
     <div style={chartContainerStyle}>
-      <div style={chartBoxStyle}>
-        <Doughnut
-          style={{ backgroundColor: "white" }}
-          id="myChart"
-          data={data}
-        />
-      </div>
+      {data?.labels?.length > 0 && (
+        <div style={chartBoxStyle}>
+          <Doughnut
+            style={{ backgroundColor: "white" }}
+            id="myChart"
+            data={data}
+          />
+        </div>
+      )}
       <button style={chartButtonStyle} onClick={downloadChart}>
         Salvar gráfico
       </button>

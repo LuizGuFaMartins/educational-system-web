@@ -26,22 +26,26 @@ const ActivityCard = ({ activity, setDeleteId }) => {
   };
 
   return (
-    <div className="card-body">
-      <div className="form-group">
-        <label>Código da disciplina:</label>
-        <span>{activity?.activity_code}</span>
-      </div>
-      <div className="form-group">
-        <label>Nome da disciplina:</label>
+    <div className="activity-card-body">
+      <div className="activity-form-group">
+        <label>Atividade:</label>
         <span>{activity?.activity_name}</span>
       </div>
-      <div className="form-group">
-        <label>Professor:</label>
-        <span>{activity?.teacher.teacher_name}</span>
+      <div className="activity-form-group">
+        <label>Disciplina:</label>
+        <span>{activity?.subject.subject_name}</span>
+      </div>
+      <div className="activity-form-group">
+        <label>Data de início:</label>
+        <span>{activity?.activity_init}</span>
+      </div>
+      <div className="activity-form-group">
+        <label>Data de fim:</label>
+        <span>{activity?.activity_end}</span>
       </div>
       <div className="buttons-box">
         <button type="primary" onClick={showModal} className="btn-buy">
-          Cancelar matrícula
+          Concluir
         </button>
         <Modal
           title={null}
@@ -66,7 +70,7 @@ const ActivityCard = ({ activity, setDeleteId }) => {
           </span>
           <div style={{ marginTop: 20 }} className="buttons-box">
             <button onClick={handleCancel}>Voltar</button>
-            <button onClick={handleOk}>Cancelar inscrição</button>
+            <button onClick={handleOk}>Concluir</button>
           </div>
         </Modal>
       </div>

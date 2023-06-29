@@ -1,16 +1,16 @@
-.product-card .card-body {
+.activity-card .activity-card-body {
   display: flex;
   flex-direction: column;
 }
 
-.product-card .card-body .buttons-box {
+.activity-card .activity-card-body .buttons-box {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 20px;
 }
 
-.product-card .card-body .buttons-box button {
+.activity-card .activity-card-body .buttons-box button {
   color: white;
   padding: 8px 16px;
   border: none;
@@ -20,69 +20,48 @@
   min-width: 140px;
 }
 
-.product-card .card-body .buttons-box button:nth-of-type(1) {
-  background-color: #e64141;
-}
-
-.product-card .buttons-box button:nth-of-type(2) {
+.activity-card .buttons-box button:nth-of-type(1) {
   background-color: #d3cb09;
 }
 
-.card-body .buttons-box button:nth-of-type(1):hover {
-  background-color: darkred;
-}
-
-.card-body .buttons-box button:nth-of-type(2):hover {
+.activity-card-body .buttons-box button:nth-of-type(1):hover {
   background-color: #5e5b03;
 }
 
-.card-body .form-groupcod label {
+.activity-card-body .activity-form-group label, span {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 2%;
 }
 
-.product-card .form-group {
+.activity-card .activity-form-group {
   margin-bottom: 2%;
   display: flex;
   flex-direction: column;
   margin: 5px 0;
 }
 
-.product-card .form-group label {
+.activity-card .activity-form-group label {
   color: #61a6ab;
   font-weight: bold;
 }
 
-.product-card .form-group:nth-of-type(1) {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-  margin: 5px 0;
-}
-
-.product-card .form-group:nth-of-type(1) span {
-  margin-left: 5px;
-}
-
-.product-modal {
+.activity-modal {
   border: 3px solid #61a6ab;
   border-radius: 20px;
   padding: 0;
   height: fit-content;
 }
 
-.product-modal .modal-text {
+.activity-modal .modal-text {
   font-size: 18px;
   padding: 20px 0;
   width: 80%;
   margin: 0 auto;
 }
 
-.product-modal .modal-warning {
+.activity-modal .modal-warning {
   font-size: 18px;
   padding: 20px 0;
   width: 70%;
@@ -91,7 +70,7 @@
   margin-bottom: 20px;
 }
 
-.product-modal button {
+.activity-modal button {
   color: white;
   padding: 8px 16px;
   border: none;
@@ -103,23 +82,23 @@
   margin: 0 5px;
 }
 
-.product-modal .buttons-box button:nth-of-type(1) {
+.activity-modal .buttons-box button:nth-of-type(1) {
   background-color: #e64141;
 }
 
-.product-modal .buttons-box button:nth-of-type(2) {
+.activity-modal .buttons-box button:nth-of-type(2) {
   background-color: #69b655;
 }
 
-.product-modal .buttons-box button:nth-of-type(1):hover {
+.activity-modal .buttons-box button:nth-of-type(1):hover {
   background-color: darkred;
 }
 
-.product-modal .buttons-box button:nth-of-type(2):hover {
+.activity-modal .buttons-box button:nth-of-type(2):hover {
   background-color: #3b6835;
 }
 
-.product-modal .product-input-group {
+.activity-modal .activity-input-group {
   width: 200px !important;
   margin: 0 auto;
   display: flex;
@@ -130,12 +109,12 @@
   margin-bottom: 30px;
 }
 
-.product-modal .product-input-group img {
+.activity-modal .activity-input-group img {
   margin: 0 5px;
   cursor: pointer;
 }
 
-.product-modal input[type="number"] {
+.activity-modal input[type="number"] {
   width: 50px;
   height: 30px;
   padding: 10px 20px;
@@ -146,6 +125,6 @@
   color: #a4a4a4;
 }
 
-.product-modal input[type="number"]:focus {
+.activity-modal input[type="number"]:focus {
   outline: none;
 }
