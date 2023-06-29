@@ -11,6 +11,7 @@ const RegisteredSubject = () => {
   const [filteredSubjects, setFilteredSubjects] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [deleteId, setDeleteId] = React.useState(0);
+  const [student, setStudent] = React.useState(null);
 
   React.useEffect(() => {
     setSubjects([]);
@@ -19,6 +20,7 @@ const RegisteredSubject = () => {
     api
       .get(`/students/${localStorage.getItem("loginId")}`)
       .then((res) => {
+        setStudent(res.data[0]);
         api
           .get(`/subjects/${res?.data[0]?.student_id}`)
           .then((res) => {
@@ -85,6 +87,7 @@ const RegisteredSubject = () => {
               <div key={sub?.subject_code} className="product-card">
                 <RegisteredSubjectCard
                   subject={sub}
+                  student={student}
                   setDeleteId={setDeleteId}
                 />
               </div>

@@ -11,10 +11,24 @@ const Subject = () => {
   const [filteredSubjects, setFilteredSubjects] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [deleteId, setDeleteId] = React.useState(0);
+  const [student, setStudent] = React.useState(null);
 
   React.useEffect(() => {
     setSubjects([]);
     setFilteredSubjects([]);
+    api
+      .get(`/students/${localStorage.getItem("loginId")}`)
+      .then((res) => {
+        setStudent(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error?.response && error.response.status === 401) {
+          navigate("/login");
+          logout();
+        }
+      });
+
     api
       .get("/subjects")
       .then((res) => {
@@ -71,7 +85,11 @@ const Subject = () => {
           {filteredSubjects.length > 0 &&
             filteredSubjects.map((sub) => (
               <div key={sub?.subject_code} className="product-card">
-                <SubjectCard subject={sub} setDeleteId={setDeleteId} />
+                <SubjectCard
+                  subject={sub}
+                  student={student}
+                  setDeleteId={setDeleteId}
+                />
               </div>
             ))}
         </div>
