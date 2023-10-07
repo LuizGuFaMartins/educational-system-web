@@ -5,6 +5,7 @@ import logo from "../../assets/images/logo-vertical.png";
 import api from "../../services/api";
 import { login } from "../../services/auth";
 import "./styles.css";
+import { Input } from "antd";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = React.useState(false);
 
   // React.useEffect(() => {
   //   if (isAuthenticated()) {
@@ -32,13 +34,13 @@ const Login = () => {
 
     if (isFormValid()) {
       api
-        .post(`/login`, {
-          loginEmail: email,
-          loginPassword: password,
+        .post(`/auth`, {
+          login_email: email,
+          login_password: password,
         })
         .then((res) => {
           login(res?.data?.accessToken);
-          localStorage.setItem("loginId", res.data.loginId);
+          localStorage.setItem("login_id", res.data.login_id);
           toast.success("Login efetuado com sucesso");
           navigate("/");
         })
@@ -75,22 +77,22 @@ const Login = () => {
           <img src={logo} alt="logo"></img>
           <form onSubmit={handleSubmit}>
             <div className="login-form-group">
-              <label htmlFor="email">E-mail:</label>
-              <input
-                type="text"
-                id="email"
+              <label htmlFor="email">E-mail</label>
+              <Input
                 value={email}
                 onChange={handleEmailChange}
               />
               {errorEmail && <small className="error">{errorEmail}</small>}
             </div>
             <div className="login-form-group">
-              <label htmlFor="password">Senha:</label>
-              <input
-                type="password"
-                id="password"
+              <label htmlFor="password">Senha</label>
+              <Input.Password
                 value={password}
                 onChange={handlePasswordChange}
+                visibilityToggle={{
+                  visible: passwordVisible,
+                  onVisibleChange: setPasswordVisible,
+                }}
               />
               {errorPassword && (
                 <small className="error">{errorPassword}</small>

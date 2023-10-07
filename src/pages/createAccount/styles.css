@@ -7,12 +7,15 @@
   color: white;
   position: relative;
   overflow: auto;
+  background: -webkit-linear-gradient(to left, #5015bd, #027fe9, #5015bd);
+  background: -moz-linear-gradient(to left, #5015bd, #027fe9, #5015bd);
+  background: -ms-linear-gradient(to left, #5015bd, #027fe9, #5015bd);
+  background: -o-linear-gradient(to left, #5015bd, #027fe9, #5015bd);
+  background: linear-gradient(to left top, #5015bd, #027fe9, #5015bd);
 }
 
 .create-account-box {
-  width: 400px;
-  /* height: 400px; */
-  background-color: #4d4d4d;
+  width: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,6 +50,7 @@
   background-color: #0b0d5e;
   color: white;
   font-size: 18px;
+  margin-top: 20px;
 }
 
 .create-account-container img {
@@ -68,10 +72,27 @@
 .create-account-form-group input {
   padding: 10px 20px;
   border: 0;
-  border-radius: 10px;
   font-size: 16px;
   background-color: #f7f7f7;
-  color: #a4a4a4;
+  color: gray;
+}
+
+.create-account-form-group .ant-select-selector {
+  height: 100% !important;
+  padding: 8px 20px !important;
+  border: 0 !important;
+  font-size: 16px !important;
+  background-color: #f7f7f7 !important;
+  color: gray !important;
+}
+
+.create-account-form-group .ant-input-affix-wrapper {
+  height: 100% !important;
+  padding: 7px 20px !important;
+  border: 0 !important;
+  font-size: 16px !important;
+  background-color: #f7f7f7 !important;
+  color: gray !important;
 }
 
 .create-account-form-group input:focus {

@@ -1,3 +1,4 @@
+import { Input, Select } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,17 +10,20 @@ import "./styles.css";
 const CreateAccount = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [type, setType] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const [errorName, setErrorName] = useState("");
-  const [errorBirthday, setErrorBirthday] = useState("");
-  const [errorPhone, setErrorPhone] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
+  const [errorType, setErrorType] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
+
+  const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] =
+    React.useState(false);
 
   React.useEffect(() => {
     if (isAuthenticated()) {
@@ -31,16 +35,12 @@ const CreateAccount = () => {
     setName(event.target.value);
   };
 
-  const handleBirthdayChange = (event) => {
-    setBirthday(event.target.value);
-  };
-
-  const handlePhoneChange = (event) => {
-    setPhone(event.target.value);
-  };
-
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
+  };
+
+  const handleTypeChange = (event) => {
+    setType(event);
   };
 
   const handlePasswordChange = (event) => {
@@ -56,10 +56,9 @@ const CreateAccount = () => {
 
     if (isFormValid()) {
       api
-        .post(`/students`, {
-          student_name: name,
-          student_birthday: birthday,
-          student_phone_number: phone,
+        .post(`/create-auth`, {
+          login_name: name,
+          login_type: type,
           login_email: email,
           login_password: password,
         })
@@ -80,9 +79,8 @@ const CreateAccount = () => {
 
   function isFormValid() {
     setErrorName("");
-    setErrorBirthday("");
-    setErrorPhone("");
     setErrorEmail("");
+    setErrorType("");
     setErrorPassword("");
     setErrorConfirmPassword("");
 
@@ -93,18 +91,13 @@ const CreateAccount = () => {
       isValid = false;
     }
 
-    if (birthday === "") {
-      setErrorBirthday("Digite o aniversário*");
-      isValid = false;
-    }
-
-    if (phone === "") {
-      setErrorPhone("Digite o telefone*");
-      isValid = false;
-    }
-
     if (email === "") {
       setErrorEmail("Digite o email*");
+      isValid = false;
+    }
+
+    if (type === "") {
+      setErrorType("Selecione o tipo da conta*");
       isValid = false;
     }
 
@@ -132,67 +125,52 @@ const CreateAccount = () => {
           <img src={logo} alt="logo"></img>
           <form onSubmit={handleSubmit}>
             <div className="create-account-form-group">
-              <label htmlFor="name">Nome:</label>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={handleNameChange}
-              />
+              <label htmlFor="name">Nome</label>
+              <Input value={name} onChange={handleNameChange} />
               {errorName && <small className="error">{errorName}</small>}
             </div>
             <div className="create-account-form-group">
-              <label htmlFor="birthday">Aniversário:</label>
-              <input
-                type="date"
-                id="birthday"
-                value={birthday}
-                onChange={handleBirthdayChange}
-              />
-              {errorBirthday && (
-                <small className="error">{errorBirthday}</small>
-              )}
-            </div>
-            <div className="create-account-form-group">
-              <label htmlFor="phone">Telefone:</label>
-              <input
-                type="text"
-                id="phone"
-                mask="(00) 00000-0000"
-                value={phone}
-                onChange={handlePhoneChange}
-              />
-              {errorPhone && <small className="error">{errorPhone}</small>}
-            </div>
-            <div className="create-account-form-group">
-              <label htmlFor="email">E-mail:</label>
-              <input
-                type="text"
-                id="email"
-                value={email}
-                onChange={handleEmailChange}
-              />
+              <label htmlFor="email">E-mail</label>
+              <Input value={email} onChange={handleEmailChange} />
               {errorEmail && <small className="error">{errorEmail}</small>}
             </div>
             <div className="create-account-form-group">
-              <label htmlFor="password">Senha:</label>
-              <input
-                type="password"
-                id="password"
+              <label htmlFor="type">Tipo da conta</label>
+              <Select
+                style={{ color: "gray" }}
+                defaultValue="STUDENT"
+                value={type}
+                onChange={handleTypeChange}
+                options={[
+                  { value: "TEACHER", label: "Professor" },
+                  { value: "STUDENT", label: "Estudante" },
+                ]}
+              />
+              {errorType && <small className="error">{errorType}</small>}
+            </div>
+            <div className="create-account-form-group">
+              <label htmlFor="password">Senha</label>
+              <Input.Password
                 value={password}
                 onChange={handlePasswordChange}
+                visibilityToggle={{
+                  visible: passwordVisible,
+                  onVisibleChange: setPasswordVisible,
+                }}
               />
               {errorPassword && (
                 <small className="error">{errorPassword}</small>
               )}
             </div>
             <div className="create-account-form-group">
-              <label htmlFor="confirmPassword">Confirmar senha:</label>
-              <input
-                type="password"
-                id="confirmPassword"
+              <label htmlFor="confirmPassword">Confirmar senha</label>
+              <Input.Password
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange}
+                visibilityToggle={{
+                  visible: confirmPasswordVisible,
+                  onVisibleChange: setConfirmPasswordVisible,
+                }}
               />
               {errorConfirmPassword && (
                 <small className="error">{errorConfirmPassword}</small>

@@ -1,16 +1,14 @@
 .create-teacher-account-container {
   width: 100%;
   height: 100vh;
-
   color: white;
   position: relative;
   overflow: auto;
 }
 
-.create-account-box {
-  width: 400px;
+.create-teacher-account-box {
+  width: 40%;
   margin: 30px auto;
-  background-color: #4d4d4d;
   display: flex;
   align-items: center;
   justify-content: center;

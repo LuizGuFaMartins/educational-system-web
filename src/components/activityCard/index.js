@@ -44,9 +44,9 @@ const ActivityCard = ({ activity, setDeleteId }) => {
         <span>{activity?.activity_end}</span>
       </div>
       <div className="buttons-box">
-        <button type="primary" onClick={showModal} className="btn-buy">
+        {/* <button type="primary" onClick={showModal} className="btn-buy">
           Concluir
-        </button>
+        </button> */}
         <Modal
           title={null}
           open={isModalOpen}
