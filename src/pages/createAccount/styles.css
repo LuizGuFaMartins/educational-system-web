@@ -7,11 +7,36 @@
   color: white;
   position: relative;
   overflow: auto;
-  background: -webkit-linear-gradient(to left, #5015bd, #027fe9, #5015bd);
-  background: -moz-linear-gradient(to left, #5015bd, #027fe9, #5015bd);
-  background: -ms-linear-gradient(to left, #5015bd, #027fe9, #5015bd);
-  background: -o-linear-gradient(to left, #5015bd, #027fe9, #5015bd);
-  background: linear-gradient(to left top, #5015bd, #027fe9, #5015bd);
+  background: -webkit-linear-gradient(
+    to left,
+    var(--primary-color-2),
+    var(--primary-color-3),
+    var(--primary-color-2)
+  );
+  background: -moz-linear-gradient(
+    to left,
+    var(--primary-color-2),
+    var(--primary-color-3),
+    var(--primary-color-2)
+  );
+  background: -ms-linear-gradient(
+    to left,
+    var(--primary-color-2),
+    var(--primary-color-3),
+    var(--primary-color-2)
+  );
+  background: -o-linear-gradient(
+    to left,
+    var(--primary-color-2),
+    var(--primary-color-3),
+    var(--primary-color-2)
+  );
+  background: linear-gradient(
+    to left top,
+    var(--primary-color-2),
+    var(--primary-color-3),
+    var(--primary-color-2)
+  );
 }
 
 .create-account-box {

@@ -22,6 +22,37 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [collapsed, setCollapsed] = React.useState(false);
+  const [routes, setRoutes] = React.useState([]);
+
+  const adminRoutes = [
+    // {
+    //   key: "1",
+    //   icon: <ShopOutlined />,
+    //   label: "Usuários",
+    //   onClick: () => navigate("/usuarios"),
+    // },
+    {
+      key: "1",
+      icon: <PlusCircleOutlined />,
+      label: "Cadastrar usuário",
+      onClick: () => navigate("/novo-usuario"),
+    },
+    {
+      key: "2",
+      icon: <UserOutlined />,
+      label: "Perfil",
+      onClick: () => navigate("/perfil"),
+    },
+    {
+      key: "3",
+      icon: <CiCircleOutlined />,
+      label: "Sair",
+      onClick: () => {
+        logout();
+        navigate("/login");
+      },
+    },
+  ];
 
   const teacherRoutes = [
     {
@@ -57,14 +88,14 @@ function App() {
     {
       key: "1",
       icon: <ShopOutlined />,
-      label: "Disciplinas",
-      onClick: () => navigate("/disciplinas"),
+      label: "Cursos",
+      onClick: () => navigate("/cursos"),
     },
     {
       key: "2",
       icon: <ShopOutlined />,
-      label: "Matriculadas",
-      onClick: () => navigate("/matriculas"),
+      label: "Disciplinas",
+      onClick: () => navigate("/disciplinas"),
     },
     {
       key: "3",
@@ -93,9 +124,22 @@ function App() {
     if (!isAuthenticated()) {
       navigate("/login");
     } else {
-      navigate("/disciplinas");
+      let login = JSON.parse(localStorage.getItem("login"));
+      if (login?.login_type === "ADMIN") {
+        setRoutes(adminRoutes);
+      }
+      if (login?.login_type === "STUDENT") {
+        setRoutes(studentRoutes);
+      }
+      if (login?.login_type === "TEACHER") {
+        setRoutes(teacherRoutes);
+      }
     }
   }, []);
+
+  React.useEffect(() => {
+    routes[0]?.onClick();
+  }, [routes]);
 
   return (
     <Layout className="layout-container">
@@ -104,7 +148,8 @@ function App() {
         collapsible
         collapsed={collapsed}
         style={{
-          background: "#4d4d4d",
+          background:
+            "linear-gradient(to bottom, var(--primary-color-2) 70%, var(--primary-color-3))",
         }}
       >
         <div className="demo-logo-vertical">
@@ -120,23 +165,20 @@ function App() {
         </div>
         <Menu
           style={{
-            background: "#4d4d4d",
+            background: "transparent",
             color: "#FFFFFF",
           }}
           mode="inline"
           defaultSelectedKeys={["1"]}
-          items={
-            process.env.REACT_APP_FLAVOR === "STUDENT"
-              ? studentRoutes
-              : teacherRoutes
-          }
+          items={routes}
         />
       </Sider>
       <Layout>
         <Header
           style={{
             padding: 0,
-            background: "#637566",
+            background:
+              "linear-gradient(to right, var(--primary-color-2) 70%, var(--primary-color-3))",
             display: "flex",
             alignContent: "center",
           }}

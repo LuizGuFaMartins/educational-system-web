@@ -1,0 +1,106 @@
+.create-user-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color-2);
+  position: relative;
+  overflow: auto;
+}
+
+.create-user-box {
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.create-user-container .create-user-box form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.create-user-container .create-user-box form a {
+  text-decoration: none;
+}
+
+.create-user-container .create-user-box form a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.create-user-container .create-user-box form button {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  background-color: #0b0d5e;
+  color: white;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.create-user-container img {
+  width: 150px;
+}
+
+.create-user-form-group {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  position: relative;
+}
+
+.create-user-form-group input {
+  padding: 10px 20px;
+  border: 1px solid var(--primary-color-2);
+  font-size: 16px;
+  background-color: #f7f7f7;
+  color: gray;
+}
+
+.create-user-form-group input[type="date"] {
+  padding: 12px 20px;
+  border: 1px solid var(--primary-color-2);
+  font-size: 16px;
+  background-color: #f7f7f7;
+  color: gray;
+  border-radius: 5px;
+}
+
+.create-user-form-group .ant-select-selector {
+  height: 100% !important;
+  padding: 8px 20px !important;
+  border: 1px solid var(--primary-color-2) !important;
+  font-size: 16px !important;
+  background-color: #f7f7f7 !important;
+  color: gray !important;
+}
+
+.create-user-form-group .ant-input-affix-wrapper {
+  height: 100% !important;
+  padding: 7px 20px !important;
+  border: 1px solid var(--primary-color-2) !important;
+  font-size: 16px !important;
+  background-color: #f7f7f7 !important;
+  color: gray !important;
+}
+
+.create-user-form-group input:focus {
+  outline: none;
+}
+
+.create-user-form-group .error {
+  color: red;
+  position: absolute;
+  left: 10px;
+  bottom: -6px;
+}

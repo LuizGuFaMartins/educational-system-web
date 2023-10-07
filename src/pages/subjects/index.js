@@ -16,32 +16,32 @@ const Subject = () => {
   React.useEffect(() => {
     setSubjects([]);
     setFilteredSubjects([]);
-    api
-      .get(`/students/${localStorage.getItem("loginId")}`)
-      .then((res) => {
-        setStudent(res.data[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error?.response && error.response.status === 401) {
-          navigate("/login");
-          logout();
-        }
-      });
+    // api
+    //   .get(`/students/${localStorage.getItem("loginId")}`)
+    //   .then((res) => {
+    //     setStudent(res.data[0]);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     if (error?.response && error.response.status === 401) {
+    //       navigate("/login");
+    //       logout();
+    //     }
+    //   });
 
-    api
-      .get("/subjects")
-      .then((res) => {
-        setSubjects(res.data);
-        setFilteredSubjects(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error?.response && error.response.status === 401) {
-          navigate("/login");
-          logout();
-        }
-      });
+    // api
+    //   .get("/subjects")
+    //   .then((res) => {
+    //     setSubjects(res.data);
+    //     setFilteredSubjects(res.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     if (error?.response && error.response.status === 401) {
+    //       navigate("/login");
+    //       logout();
+    //     }
+    //   });
   }, []);
 
   React.useEffect(() => {

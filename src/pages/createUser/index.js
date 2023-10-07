@@ -1,23 +1,28 @@
 import { Input, Select } from "antd";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import logo from "../../assets/images/logo-vertical.png";
 import api from "../../services/api";
 import { isAuthenticated } from "../../services/auth";
 import "./styles.css";
 
-const CreateAccount = () => {
+const CreateUser = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [type, setType] = useState("ADMIN");
+  const [birthday, setBirthday] = useState("");
+  const [phone, setPhone] = useState("");
+  const [type, setType] = useState("");
+  const [specialization, setSpecialization] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [errorName, setErrorName] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
+  const [errorBirthday, setErrorBirthday] = useState("");
+  const [errorPhone, setErrorPhone] = useState("");
   const [errorType, setErrorType] = useState("");
+  const [errorSpecialization, setErrorSpecialization] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = useState("");
 
@@ -26,7 +31,7 @@ const CreateAccount = () => {
     React.useState(false);
 
   React.useEffect(() => {
-    if (isAuthenticated()) {
+    if (!isAuthenticated()) {
       navigate("/");
     }
   }, []);
@@ -39,8 +44,20 @@ const CreateAccount = () => {
     setEmail(event.target.value);
   };
 
+  const handleBirthdayChange = (event) => {
+    setBirthday(event.target.value);
+  };
+
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value);
+  };
+
   const handleTypeChange = (event) => {
     setType(event);
+  };
+
+  const handleSpecializationChange = (event) => {
+    setType(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -123,7 +140,10 @@ const CreateAccount = () => {
   function isFormValid() {
     setErrorName("");
     setErrorEmail("");
+    setErrorBirthday("");
+    setErrorPhone("");
     setErrorType("");
+    setErrorSpecialization("");
     setErrorPassword("");
     setErrorConfirmPassword("");
 
@@ -144,8 +164,23 @@ const CreateAccount = () => {
       isValid = false;
     }
 
+    if (type === "TEACHER" && specialization === "") {
+      setErrorType("Digite a especialização*");
+      isValid = false;
+    }
+
     if (password === "") {
       setErrorPassword("Digite a senha*");
+      isValid = false;
+    }
+
+    if (birthday === "") {
+      setErrorBirthday("Digite o aniversário*");
+      isValid = false;
+    }
+
+    if (phone === "") {
+      setErrorPhone("Digite o telefone*");
       isValid = false;
     }
 
@@ -163,21 +198,40 @@ const CreateAccount = () => {
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} />
-      <div className="create-account-container">
-        <div className="create-account-box">
-          <img src={logo} alt="logo"></img>
+      <div className="create-user-container">
+        <div className="create-user-box">
           <form onSubmit={handleSubmit}>
-            <div className="create-account-form-group">
+            <div className="create-user-form-group">
               <label htmlFor="name">Nome</label>
               <Input value={name} onChange={handleNameChange} />
               {errorName && <small className="error">{errorName}</small>}
             </div>
-            <div className="create-account-form-group">
+            <div className="create-user-form-group">
               <label htmlFor="email">E-mail</label>
               <Input value={email} onChange={handleEmailChange} />
               {errorEmail && <small className="error">{errorEmail}</small>}
             </div>
-            {/* <div className="create-account-form-group">
+            <div className="create-user-form-group">
+              <label htmlFor="birthday">Aniversário:</label>
+              <input
+                type="date"
+                id="birthday"
+                value={birthday}
+                onChange={handleBirthdayChange}
+              />
+              {errorBirthday && (
+                <small className="error">{errorBirthday}</small>
+              )}
+            </div>
+            <div className="create-user-form-group">
+              <label htmlFor="phone">Telefone:</label>
+              <Input
+                mask="(00) 00000-0000"
+                value={phone}
+                onChange={handlePhoneChange}
+              />
+            </div>
+            <div className="create-user-form-group">
               <label htmlFor="type">Tipo da conta</label>
               <Select
                 style={{ color: "gray" }}
@@ -190,8 +244,20 @@ const CreateAccount = () => {
                 ]}
               />
               {errorType && <small className="error">{errorType}</small>}
-            </div> */}
-            <div className="create-account-form-group">
+            </div>
+            {type === "TEACHER" && (
+              <div className="create-user-form-group">
+                <label htmlFor="specialization">Especialização:</label>
+                <Input
+                  value={specialization}
+                  onChange={handleSpecializationChange}
+                />
+                {errorSpecialization && (
+                  <small className="error">{errorSpecialization}</small>
+                )}
+              </div>
+            )}
+            <div className="create-user-form-group">
               <label htmlFor="password">Senha</label>
               <Input.Password
                 value={password}
@@ -205,7 +271,7 @@ const CreateAccount = () => {
                 <small className="error">{errorPassword}</small>
               )}
             </div>
-            <div className="create-account-form-group">
+            <div className="create-user-form-group">
               <label htmlFor="confirmPassword">Confirmar senha</label>
               <Input.Password
                 value={confirmPassword}
@@ -220,9 +286,6 @@ const CreateAccount = () => {
               )}
             </div>
             <button type="submit">Cadastrar</button>
-            <Link to={"/login"}>
-              <p style={{ color: "white" }}>Fazer login</p>
-            </Link>
           </form>
         </div>
       </div>
@@ -230,4 +293,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default CreateUser;

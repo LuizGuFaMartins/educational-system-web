@@ -1,3 +1,4 @@
+import { Input } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -5,12 +6,11 @@ import logo from "../../assets/images/logo-vertical.png";
 import api from "../../services/api";
 import { login } from "../../services/auth";
 import "./styles.css";
-import { Input } from "antd";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("gabriel@gmail.com");
+  const [password, setPassword] = useState("123456789");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = React.useState(false);
@@ -40,7 +40,7 @@ const Login = () => {
         })
         .then((res) => {
           login(res?.data?.accessToken);
-          localStorage.setItem("login_id", res.data.login_id);
+          localStorage.setItem("login", JSON.stringify(res.data));
           toast.success("Login efetuado com sucesso");
           navigate("/");
         })
@@ -78,10 +78,7 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <div className="login-form-group">
               <label htmlFor="email">E-mail</label>
-              <Input
-                value={email}
-                onChange={handleEmailChange}
-              />
+              <Input value={email} onChange={handleEmailChange} />
               {errorEmail && <small className="error">{errorEmail}</small>}
             </div>
             <div className="login-form-group">
