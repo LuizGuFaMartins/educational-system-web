@@ -39,7 +39,7 @@ const Login = () => {
           login_password: password,
         })
         .then((res) => {
-          login(res?.data?.accessToken);
+          login(res?.data?.access_token);
           localStorage.setItem("login", JSON.stringify(res.data));
           toast.success("Login efetuado com sucesso");
           navigate("/");

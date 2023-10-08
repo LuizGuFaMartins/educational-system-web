@@ -4,6 +4,8 @@ export const isAuthenticated = () =>
 
 export const getToken = () => localStorage.getItem("acess-token");
 
+export const getLoginObject = () => JSON.parse(localStorage.getItem("login"));
+
 export const login = (token) => {
   localStorage.setItem("acess-token", token);
 };

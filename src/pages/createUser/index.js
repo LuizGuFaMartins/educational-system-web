@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import api from "../../services/api";
-import { isAuthenticated } from "../../services/auth";
+import { getLoginObject, isAuthenticated } from "../../services/auth";
 import "./styles.css";
 
 const CreateUser = () => {
@@ -57,7 +57,7 @@ const CreateUser = () => {
   };
 
   const handleSpecializationChange = (event) => {
-    setType(event.target.value);
+    setSpecialization(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -78,53 +78,52 @@ const CreateUser = () => {
           login_type: type,
           login_email: email,
           login_password: password,
+          created_by: getLoginObject().login_id,
         })
         .then((res) => {
-          toast.success("Usuário cadastrado com sucesso");
-
-          api
-            .post(`/students`, {
-              login_name: name,
-              login_type: type,
-              login_email: email,
-              login_password: password,
-            })
-            .then((res) => {
-              toast.success("Usuário cadastrado com sucesso");
-
-              navigate("/login");
-            })
-            .catch((error) => {
-              console.log(error);
-              if (error?.response?.status === 409) {
-                toast.error("Já existe um usuário com este e-mail");
-              } else {
-                toast.error("Não foi possível criar o usuário");
-              }
-            });
-
-          api
-            .post(`/teachers`, {
-              login_name: name,
-              login_type: type,
-              login_email: email,
-              login_password: password,
-            })
-            .then((res) => {
-              toast.success("Usuário cadastrado com sucesso");
-
-              navigate("/login");
-            })
-            .catch((error) => {
-              console.log(error);
-              if (error?.response?.status === 409) {
-                toast.error("Já existe um usuário com este e-mail");
-              } else {
-                toast.error("Não foi possível criar o usuário");
-              }
-            });
-
-          navigate("/login");
+          if (res?.data?.login_type === "STUDENT") {
+            api
+              .post(`/students`, {
+                student_name: name,
+                student_birthday: birthday,
+                student_phone_number: phone,
+                login_id: res.data.login_id,
+              })
+              .then((res) => {
+                toast.success("Usuário cadastrado com sucesso");
+                cleanFormFields();
+              })
+              .catch((error) => {
+                console.log(error);
+                if (error?.response?.status === 409) {
+                  toast.error("Já existe um usuário com este e-mail");
+                } else {
+                  toast.error("Não foi possível criar o usuário");
+                }
+              });
+          }
+          if (res?.data?.login_type === "TEACHER") {
+            api
+              .post(`/teachers`, {
+                teacher_name: name,
+                teacher_birthday: birthday,
+                teacher_phone_number: phone,
+                teacher_specialization: specialization,
+                login_id: res.data.login_id,
+              })
+              .then((res) => {
+                toast.success("Usuário cadastrado com sucesso");
+                cleanFormFields();
+              })
+              .catch((error) => {
+                console.log(error);
+                if (error?.response?.status === 409) {
+                  toast.error("Já existe um usuário com este e-mail");
+                } else {
+                  toast.error("Não foi possível criar o usuário");
+                }
+              });
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -136,6 +135,17 @@ const CreateUser = () => {
         });
     }
   };
+
+  function cleanFormFields() {
+    setName("");
+    setEmail("");
+    setBirthday("");
+    setPhone("");
+    setType("");
+    setSpecialization("");
+    setPassword("");
+    setConfirmPassword("");
+  }
 
   function isFormValid() {
     setErrorName("");

@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Input, Modal } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,11 +16,15 @@ const Profile = () => {
 
   React.useEffect(() => {
     api
-      .get(`/login/${localStorage.getItem("loginId")}`)
+      .get(
+        `/logins?where={"login_id":${
+          JSON.parse(localStorage.getItem("login")).login_id
+        }}`
+      )
       .then((res) => {
-        setLogin(res.data);
-        setNome(res.data.login_name);
-        setEmail(res.data.login_email);
+        setLogin(res.data[0]);
+        setNome(res.data[0].login_name);
+        setEmail(res.data[0].login_email);
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +50,7 @@ const Profile = () => {
 
   const handleOk = () => {
     api
-      .put(`/login/${login.login_id}`, { loginName: nome, loginEmail: email })
+      .put(`/logins/${login.login_id}`, { login_name: nome, login_email: email })
       .then(() => {
         toast.success("Usuário atualizado com sucesso");
         setIsModalOpen(false);
@@ -88,16 +92,14 @@ const Profile = () => {
           <form onSubmit={(event) => event.preventDefault()}>
             <div className="profile-input-group">
               <label htmlFor="nome">Nome:</label>
-              <input
-                type="text"
-                id="nome"
+              <Input
                 value={nome}
                 onChange={handleNomeChange}
               />
             </div>
             <div className="profile-input-group">
               <label htmlFor="email">E-mail:</label>
-              <input
+              <Input
                 type="text"
                 id="email"
                 value={email}
