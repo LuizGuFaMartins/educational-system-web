@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import SubjectCard from "../../components/subjectCard";
 import api from "../../services/api";
-import { logout } from "../../services/auth";
+import { getLoginObject, logout } from "../../services/auth";
 import "./styles.css";
 
 const Subject = () => {
@@ -16,32 +16,32 @@ const Subject = () => {
   React.useEffect(() => {
     setSubjects([]);
     setFilteredSubjects([]);
-    // api
-    //   .get(`/students/${localStorage.getItem("loginId")}`)
-    //   .then((res) => {
-    //     setStudent(res.data[0]);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     if (error?.response && error.response.status === 401) {
-    //       navigate("/login");
-    //       logout();
-    //     }
-    //   });
+    api
+      .get(`/students?where={"login_id":${getLoginObject().login_id}}`)
+      .then((res) => {
+        setStudent(res.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error?.response && error.response.status === 401) {
+          navigate("/login");
+          logout();
+        }
+      });
 
-    // api
-    //   .get("/subjects")
-    //   .then((res) => {
-    //     setSubjects(res.data);
-    //     setFilteredSubjects(res.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     if (error?.response && error.response.status === 401) {
-    //       navigate("/login");
-    //       logout();
-    //     }
-    //   });
+    api
+      .get("/subjects?include=[\"teachers\"]")
+      .then((res) => {
+        setSubjects(res.data);
+        setFilteredSubjects(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error?.response && error.response.status === 401) {
+          navigate("/login");
+          logout();
+        }
+      });
   }, []);
 
   React.useEffect(() => {

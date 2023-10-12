@@ -2,11 +2,10 @@ import { Modal } from "antd";
 import React from "react";
 
 import "./styles.css";
+import dayjs from "dayjs";
 
 const ActivityCard = ({ activity, setDeleteId }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [isBuyModalOpen, setIsBuyModalOpen] = React.useState(false);
-  const [quantity, setQuantity] = React.useState(0);
 
   function onDelete() {
     setDeleteId(activity.subject_id);
@@ -37,16 +36,13 @@ const ActivityCard = ({ activity, setDeleteId }) => {
       </div>
       <div className="activity-form-group">
         <label>Data de início:</label>
-        <span>{activity?.activity_init}</span>
+        <span>{dayjs(activity?.activity_init).format("DD/MM/YYYY HH:mm")}</span>
       </div>
       <div className="activity-form-group">
         <label>Data de fim:</label>
-        <span>{activity?.activity_end}</span>
+        <span>{dayjs(activity?.activity_end).format("DD/MM/YYYY HH:mm")}</span>
       </div>
       <div className="buttons-box">
-        {/* <button type="primary" onClick={showModal} className="btn-buy">
-          Concluir
-        </button> */}
         <Modal
           title={null}
           open={isModalOpen}

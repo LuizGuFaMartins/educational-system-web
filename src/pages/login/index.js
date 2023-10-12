@@ -9,7 +9,7 @@ import "./styles.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("gabriel@gmail.com");
+  const [email, setEmail] = useState("farabello@gmail.com");
   const [password, setPassword] = useState("123456789");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");

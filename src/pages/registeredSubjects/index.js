@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import RegisteredSubjectCard from "../../components/registeredSubjectCard";
 import api from "../../services/api";
-import { logout } from "../../services/auth";
+import { getLoginObject, logout } from "../../services/auth";
 import "./styles.css";
 
 const RegisteredSubject = () => {
@@ -18,11 +18,13 @@ const RegisteredSubject = () => {
     setFilteredSubjects([]);
 
     api
-      .get(`/students/${localStorage.getItem("loginId")}`)
+      .get(`/students?where={\"login_id\":${getLoginObject().login_id}}`)
       .then((res) => {
         setStudent(res.data[0]);
         api
-          .get(`/subjects/${res?.data[0]?.student_id}`)
+          .get(
+            `/studentsSubjects?where={\"student_id\":${res?.data[0]?.student_id}}&include=[\"subjects\"]`
+          )
           .then((res) => {
             setSubjects(res.data);
             setFilteredSubjects(res.data);
@@ -86,7 +88,7 @@ const RegisteredSubject = () => {
             filteredSubjects.map((sub) => (
               <div key={sub?.subject_code} className="product-card">
                 <RegisteredSubjectCard
-                  subject={sub}
+                  subject={sub.subject}
                   student={student}
                   setDeleteId={setDeleteId}
                 />

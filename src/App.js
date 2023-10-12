@@ -85,17 +85,23 @@ function App() {
   ];
 
   const studentRoutes = [
+    // {
+    //   key: "1",
+    //   icon: <ShopOutlined />,
+    //   label: "Cursos",
+    //   onClick: () => navigate("/cursos"),
+    // },
     {
       key: "1",
       icon: <ShopOutlined />,
-      label: "Cursos",
-      onClick: () => navigate("/cursos"),
+      label: "Disciplinas",
+      onClick: () => navigate("/disciplinas"),
     },
     {
       key: "2",
       icon: <ShopOutlined />,
-      label: "Disciplinas",
-      onClick: () => navigate("/disciplinas"),
+      label: "Matriculas",
+      onClick: () => navigate("/matriculas"),
     },
     {
       key: "3",

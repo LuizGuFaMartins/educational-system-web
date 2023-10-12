@@ -57,10 +57,10 @@ const RegisteredSubjectCard = ({ subject, student, setDeleteId }) => {
           <label>Nome da disciplina:</label>
           <span>{subject?.subject_name}</span>
         </div>
-        <div className="form-group">
-          <label>Professor:</label>
-          <span>{subject?.teacher.teacher_name}</span>
-        </div>
+        {/* <div className="form-group">
+          <label>Carga horária:</label>
+          <span>{subject?.}</span>
+        </div> */}
         <div className="buttons-box">
           <button
             type="primary"
