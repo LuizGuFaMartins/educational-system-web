@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import RegisteredSubjectCard from "../../components/registeredSubjectCard";
 import api from "../../services/api";
-import { getLoginObject, logout } from "../../services/auth";
+import { logout } from "../../services/auth";
 import "./styles.css";
 
 const RegisteredSubject = () => {
@@ -11,31 +12,18 @@ const RegisteredSubject = () => {
   const [filteredSubjects, setFilteredSubjects] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [deleteId, setDeleteId] = React.useState(0);
-  const [student, setStudent] = React.useState(null);
+  const student = useSelector(state => state.student)
 
   React.useEffect(() => {
     setSubjects([]);
     setFilteredSubjects([]);
-
     api
-      .get(`/students?where={\"login_id\":${getLoginObject().login_id}}`)
+      .get(
+        `/subjects/${student?.student_id}`
+      )
       .then((res) => {
-        setStudent(res.data[0]);
-        api
-          .get(
-            `/studentsSubjects?where={\"student_id\":${res?.data[0]?.student_id}}&include=[\"subjects\"]`
-          )
-          .then((res) => {
-            setSubjects(res.data);
-            setFilteredSubjects(res.data);
-          })
-          .catch((error) => {
-            console.log(error);
-            if (error?.response && error.response.status === 401) {
-              navigate("/login");
-              logout();
-            }
-          });
+        setSubjects(res.data);
+        setFilteredSubjects(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -44,6 +32,7 @@ const RegisteredSubject = () => {
           logout();
         }
       });
+
   }, []);
 
   React.useEffect(() => {
@@ -88,7 +77,7 @@ const RegisteredSubject = () => {
             filteredSubjects.map((sub) => (
               <div key={sub?.subject_code} className="product-card">
                 <RegisteredSubjectCard
-                  subject={sub.subject}
+                  subject={sub}
                   student={student}
                   setDeleteId={setDeleteId}
                 />

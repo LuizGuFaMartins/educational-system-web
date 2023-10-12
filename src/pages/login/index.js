@@ -1,8 +1,10 @@
 import { Input } from "antd";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import logo from "../../assets/images/logo-vertical.png";
+import { reducerSetLogin } from "../../redux/logins/loginSlice";
 import api from "../../services/api";
 import { login } from "../../services/auth";
 import "./styles.css";
@@ -14,12 +16,7 @@ const Login = () => {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   if (isAuthenticated()) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  const dispatch = useDispatch()
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -40,7 +37,13 @@ const Login = () => {
         })
         .then((res) => {
           login(res?.data?.access_token);
+
+          dispatch(reducerSetLogin({
+            ...res.data
+          }))
+
           localStorage.setItem("login", JSON.stringify(res.data));
+
           toast.success("Login efetuado com sucesso");
           navigate("/");
         })

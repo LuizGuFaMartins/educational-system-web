@@ -21,11 +21,11 @@
 }
 
 .activity-card .buttons-box button:nth-of-type(1) {
-  background-color: #d3cb09;
+  background-color: var(--primary-color-4);
 }
 
 .activity-card-body .buttons-box button:nth-of-type(1):hover {
-  background-color: #5e5b03;
+  background-color: var(--primary-color-3);
 }
 
 .activity-card-body .activity-form-group label, span {
@@ -43,12 +43,12 @@
 }
 
 .activity-card .activity-form-group label {
-  color: #61a6ab;
+  color: var(--primary-color-2);
   font-weight: bold;
 }
 
 .activity-modal {
-  border: 3px solid #61a6ab;
+  border: 3px solid var(--primary-color-2);
   border-radius: 20px;
   padding: 0;
   height: fit-content;
@@ -87,7 +87,7 @@
 }
 
 .activity-modal .buttons-box button:nth-of-type(2) {
-  background-color: #69b655;
+  background-color: var(--primary-color-2);
 }
 
 .activity-modal .buttons-box button:nth-of-type(1):hover {
@@ -95,7 +95,7 @@
 }
 
 .activity-modal .buttons-box button:nth-of-type(2):hover {
-  background-color: #3b6835;
+  background-color: var(--primary-color-1);
 }
 
 .activity-modal .activity-input-group {
@@ -105,7 +105,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  color: #61a6ab;
+  color: var(--primary-color-2);
   margin-bottom: 30px;
 }
 
@@ -118,7 +118,7 @@
   width: 50px;
   height: 30px;
   padding: 10px 20px;
-  border: 2px solid #61a6ab;
+  border: 2px solid var(--primary-color-2);
   border-radius: 10px;
   font-size: 16px;
   background-color: #f7f7f7;

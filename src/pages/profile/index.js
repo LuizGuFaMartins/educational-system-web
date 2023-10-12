@@ -107,13 +107,13 @@ const Profile = () => {
               />
             </div>
             <div className="profile-button-box">
-              <button
+              {/* <button
                 type="primary"
                 onClick={showUnnactiveModal}
                 className="btn-buy"
               >
                 Desativar conta
-              </button>
+              </button> */}
               <Modal
                 title={null}
                 open={isUnnactiveModalOpen}

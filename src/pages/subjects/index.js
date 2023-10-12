@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SubjectCard from "../../components/subjectCard";
 import api from "../../services/api";
-import { getLoginObject, logout } from "../../services/auth";
+import { logout } from "../../services/auth";
 import "./styles.css";
 
 const Subject = () => {
@@ -11,24 +12,11 @@ const Subject = () => {
   const [filteredSubjects, setFilteredSubjects] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [deleteId, setDeleteId] = React.useState(0);
-  const [student, setStudent] = React.useState(null);
+  const student = useSelector(state => state.student)
 
   React.useEffect(() => {
     setSubjects([]);
     setFilteredSubjects([]);
-    api
-      .get(`/students?where={"login_id":${getLoginObject().login_id}}`)
-      .then((res) => {
-        setStudent(res.data[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error?.response && error.response.status === 401) {
-          navigate("/login");
-          logout();
-        }
-      });
-
     api
       .get("/subjects?include=[\"teachers\"]")
       .then((res) => {

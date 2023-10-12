@@ -36,7 +36,7 @@
 }
 
 .form-group label {
-  color: #61a6ab;
+  color: var(--primary-color-2);
   font-weight: bold;
 }
 
@@ -53,7 +53,7 @@
 }
 
 .shoppincart-modal-remove-item {
-  border: 3px solid #61a6ab;
+  border: 3px solid var(--primary-color-2);
   border-radius: 20px;
   padding: 0;
 }
@@ -82,7 +82,7 @@
 }
 
 .shoppincart-modal-remove-item .buttons-box button:nth-of-type(2) {
-  background-color: #69b655;
+  background-color: var(--primary-color-2);
 }
 
 .shoppincart-modal-remove-item .buttons-box button:nth-of-type(1):hover {
@@ -90,5 +90,5 @@
 }
 
 .shoppincart-modal-remove-item .buttons-box button:nth-of-type(2):hover {
-  background-color: #3b6835;
+  background-color: var(--primary-color-1);
 }

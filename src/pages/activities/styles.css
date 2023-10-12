@@ -21,7 +21,7 @@
   height: 100%;
   padding: 10px 20px;
   padding-right: 55px;
-  border: 2px solid #61a6ab;
+  border: 2px solid var(--primary-color-2);
   border-radius: 10px;
   font-size: 16px;
   background-color: #f7f7f7;
@@ -52,7 +52,7 @@
 }
 
 .product-card {
-  border: 3px solid #61a6ab;
+  border: 3px solid var(--primary-color-2);
   border-radius: 35px;
   padding: 1rem 1.5rem;
   width: 31%;

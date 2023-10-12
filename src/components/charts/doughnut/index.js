@@ -36,7 +36,7 @@ const DoughnutChart = ({
         cursor: "pointer",
         outline: "none",
         marginTop: 20,
-        backgroundColor: "#d3cb09",
+        backgroundColor: "var(--primary-color-4)",
         border: "none",
         color: "white",
       };

@@ -11,11 +11,15 @@ import { Button, Layout, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Content, Header } from "antd/es/layout/layout";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import logo from "./assets/images/logo-horizontal.png";
 import logoIcon from "./assets/images/logo-icon.png";
+import { reducerSetStudent } from "./redux/students/studentSlice";
+import { reducerSetTeacher } from "./redux/teachers/teacherSlice";
+import api from "./services/api";
 import { isAuthenticated, logout } from "./services/auth";
 
 function App() {
@@ -23,6 +27,8 @@ function App() {
   const location = useLocation();
   const [collapsed, setCollapsed] = React.useState(false);
   const [routes, setRoutes] = React.useState([]);
+  const login = useSelector(state => state.login)
+  const dispatch = useDispatch()
 
   const adminRoutes = [
     // {
@@ -130,14 +136,41 @@ function App() {
     if (!isAuthenticated()) {
       navigate("/login");
     } else {
-      let login = JSON.parse(localStorage.getItem("login"));
       if (login?.login_type === "ADMIN") {
         setRoutes(adminRoutes);
       }
       if (login?.login_type === "STUDENT") {
+        api
+          .get(`/students?where={"login_id":${login.login_id}}`)
+          .then((res) => {
+            dispatch(reducerSetStudent({
+              ...res.data[0]
+            }))
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error?.response && error.response.status === 401) {
+              navigate("/login");
+              logout();
+            }
+          });
         setRoutes(studentRoutes);
       }
       if (login?.login_type === "TEACHER") {
+        api
+          .get(`/teachers?where={"login_id":${login.login_id}}`)
+          .then((res) => {
+            dispatch(reducerSetTeacher({
+              ...res.data[0]
+            }))
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error?.response && error.response.status === 401) {
+              navigate("/login");
+              logout();
+            }
+          });
         setRoutes(teacherRoutes);
       }
     }
@@ -205,12 +238,14 @@ function App() {
               {location.pathname.includes("/turmas")
                 ? "Turmas"
                 : location.pathname.includes("/atividades")
-                ? "Atividades"
-                : location.pathname.includes("/disciplinas")
-                ? "Disciplinas"
-                : location.pathname.includes("/carrinho")
-                ? "Carrinho"
-                : ""}
+                  ? "Atividades"
+                  : location.pathname.includes("/disciplinas")
+                    ? "Disciplinas"
+                    : location.pathname.includes("/matriculas")
+                      ? "Matriculas"
+                      : location.pathname.includes("/perfil")
+                        ? "Perfil"
+                        : ""}
             </h2>
           </div>
         </Header>

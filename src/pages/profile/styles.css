@@ -65,18 +65,22 @@
   border: o;
 }
 
-.profile-button-box button:nth-of-type(1) {
+/* .profile-button-box button:nth-of-type(1) {
   background-color: darkred;
+} */
+
+.profile-button-box button:nth-of-type(1) {
+  background-color: var(--primary-color-2);
 }
 
-.profile-button-box button:nth-of-type(2) {
+.profile-button-box button:nth-of-type(1):hover {
   background-color: var(--primary-color-1);
 }
 
 .profile-button {
   width: 200px;
   padding: 6px 45px;
-  background-color: #69b655;
+  background-color: var(--primary-color-2);
   color: white;
   cursor: pointer;
   outline: none;
@@ -113,9 +117,17 @@
 }
 
 .profile-modal .buttons-box button:nth-of-type(1) {
+  background-color: #e64141;
+}
+
+.profile-modal .buttons-box button:nth-of-type(1):hover {
   background-color: darkred;
 }
 
 .profile-modal .buttons-box button:nth-of-type(2) {
+  background-color: var(--primary-color-2);
+}
+
+.profile-modal .buttons-box button:nth-of-type(2):hover {
   background-color: var(--primary-color-1);
 }

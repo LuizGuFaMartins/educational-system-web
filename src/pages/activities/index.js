@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ActivityCard from "../../components/activityCard";
 import api from "../../services/api";
-import { getLoginObject, logout } from "../../services/auth";
+import { logout } from "../../services/auth";
 import "./styles.css";
 
 const Activity = () => {
@@ -11,26 +12,16 @@ const Activity = () => {
   const [filteredActivities, setFilteredSubjects] = React.useState([]);
   const [search, setSearch] = React.useState("");
   const [deleteId, setDeleteId] = React.useState(0);
+  const student = useSelector(state => state.student)
 
   React.useEffect(() => {
     setActivities([]);
     setFilteredSubjects([]);
     api
-      .get(`/students?where={\"login_id\":${getLoginObject().login_id}}`)
-      .then((res) => {
-        api
-          .get(`/activities/${res?.data[0]?.student_id}`)
-          .then((acts) => {
-            setActivities(acts.data);
-            setFilteredSubjects(acts.data);
-          })
-          .catch((error) => {
-            console.log(error);
-            if (error?.response && error.response.status === 401) {
-              navigate("/login");
-              logout();
-            }
-          });
+      .get(`/activities/${student?.student_id}`)
+      .then((acts) => {
+        setActivities(acts.data);
+        setFilteredSubjects(acts.data);
       })
       .catch((error) => {
         console.log(error);

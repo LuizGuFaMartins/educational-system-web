@@ -24,3 +24,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ant-modal,
+.ant-modal-content {
+  border-radius: 20px !important;
+}

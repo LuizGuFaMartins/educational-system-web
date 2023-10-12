@@ -21,11 +21,11 @@
 }
 
 .btn-subject-card {
-  background-color: #d3cb09;
+  background-color: var(--primary-color-2);
 }
 
 .btn-subject-card:hover {
-  background-color: #5e5b03;
+  background-color: var(--primary-color-1);
 }
 
 .card-body .form-groupcod label {
@@ -43,7 +43,7 @@
 }
 
 .product-card .form-group label {
-  color: #61a6ab;
+  color: var(--primary-color-2);
   font-weight: bold;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .product-modal {
-  border: 3px solid #61a6ab;
+  border: 3px solid var(--primary-color-2);
   border-radius: 20px;
   padding: 0;
   height: fit-content;
@@ -100,7 +100,7 @@
 }
 
 .product-modal .buttons-box button:nth-of-type(2) {
-  background-color: #69b655;
+  background-color: var(--primary-color-2);
 }
 
 .product-modal .buttons-box button:nth-of-type(1):hover {
@@ -108,7 +108,7 @@
 }
 
 .product-modal .buttons-box button:nth-of-type(2):hover {
-  background-color: #3b6835;
+  background-color: var(--primary-color-1);
 }
 
 .product-modal .product-input-group {
@@ -118,7 +118,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  color: #61a6ab;
+  color: var(--primary-color-2);
   margin-bottom: 30px;
 }
 
@@ -131,7 +131,7 @@
   width: 50px;
   height: 30px;
   padding: 10px 20px;
-  border: 2px solid #61a6ab;
+  border: 2px solid var(--primary-color-2);
   border-radius: 10px;
   font-size: 16px;
   background-color: #f7f7f7;
