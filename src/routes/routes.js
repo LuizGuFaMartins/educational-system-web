@@ -4,24 +4,29 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Activity from "../pages/activities";
 import CreateAccount from "../pages/createAccount";
+import CreateActivity from "../pages/createActivity";
 import CreateTeacherAccount from "../pages/createTeacherAccount";
 import CreateUser from "../pages/createUser";
 import Login from "../pages/login";
 import Profile from "../pages/profile";
 import RegisteredSubject from "../pages/registeredSubjects";
 import Subject from "../pages/subjects";
+import CreateSubject from "../pages/createSubject";
+import CreateCourse from "../pages/createCourse";
 
 const Routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "/turmas", element: <Subject /> },
+      { path: "/novo-usuario", element: <CreateUser /> },
+      { path: "/novo-curso", element: <CreateCourse /> },
+      { path: "/nova-disciplina", element: <CreateSubject /> },
       { path: "/atividades", element: <Activity /> },
+      { path: "/nova-atividade", element: <CreateActivity /> },
+      // { path: "/turmas", element: <Subject /> },
       { path: "/disciplinas", element: <Subject /> },
       { path: "/matriculas", element: <RegisteredSubject /> },
-      { path: "/usuarios", element: <RegisteredSubject /> },
-      { path: "/novo-usuario", element: <CreateUser /> },
       { path: "/perfil", element: <Profile /> },
     ],
   },

@@ -31,12 +31,6 @@ function App() {
   const dispatch = useDispatch()
 
   const adminRoutes = [
-    // {
-    //   key: "1",
-    //   icon: <ShopOutlined />,
-    //   label: "Usuários",
-    //   onClick: () => navigate("/usuarios"),
-    // },
     {
       key: "1",
       icon: <PlusCircleOutlined />,
@@ -45,12 +39,24 @@ function App() {
     },
     {
       key: "2",
+      icon: <PlusCircleOutlined />,
+      label: "Cadastrar curso",
+      onClick: () => navigate("/novo-curso"),
+    },
+    {
+      key: "3",
+      icon: <PlusCircleOutlined />,
+      label: "Cadastrar disciplina",
+      onClick: () => navigate("/nova-disciplina"),
+    },
+    {
+      key: "4",
       icon: <UserOutlined />,
       label: "Perfil",
       onClick: () => navigate("/perfil"),
     },
     {
-      key: "3",
+      key: "5",
       icon: <CiCircleOutlined />,
       label: "Sair",
       onClick: () => {
@@ -64,14 +70,20 @@ function App() {
     {
       key: "1",
       icon: <ShopOutlined />,
-      label: "Turmas",
-      onClick: () => navigate("/turmas"),
+      label: "Disciplinas",
+      onClick: () => navigate("/disciplinas"),
     },
+    // {
+    //   key: "2",
+    //   icon: <PlusCircleOutlined />,
+    //   label: "Atividades",
+    //   onClick: () => navigate("/atividades"),
+    // },
     {
       key: "2",
       icon: <PlusCircleOutlined />,
       label: "Cadastrar atividade",
-      onClick: () => navigate("/atividades"),
+      onClick: () => navigate("/nova-atividade"),
     },
     {
       key: "3",
@@ -183,6 +195,7 @@ function App() {
   return (
     <Layout className="layout-container">
       <Sider
+        width={220}
         trigger={null}
         collapsible
         collapsed={collapsed}
@@ -245,7 +258,15 @@ function App() {
                       ? "Matriculas"
                       : location.pathname.includes("/perfil")
                         ? "Perfil"
-                        : ""}
+                        : location.pathname.includes("/nova-disciplina")
+                          ? "Nova disciplina"
+                          : location.pathname.includes("/novo-usuario")
+                            ? "Novo usuário"
+                            : location.pathname.includes("/nova-atividade")
+                              ? "Nova atividade"
+                              : location.pathname.includes("/novo-curso")
+                                ? "Novo curso"
+                                : ""}
             </h2>
           </div>
         </Header>

@@ -2,6 +2,7 @@ import { Modal } from "antd";
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { logout } from "../../services/auth";
@@ -9,6 +10,7 @@ import "./styles.css";
 
 const SubjectCard = ({ subject, student, setDeleteId }) => {
   const navigate = useNavigate();
+  const login = useSelector(state => state.login)
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
@@ -57,10 +59,12 @@ const SubjectCard = ({ subject, student, setDeleteId }) => {
           <label>Nome da disciplina:</label>
           <span>{subject?.subject_name}</span>
         </div>
-        <div className="form-group">
-          <label>Professor:</label>
-          <span>{subject?.teacher.teacher_name}</span>
-        </div>
+        {login.login_type === "STUDENT" &&
+          <div className="form-group">
+            <label>Professor:</label>
+            <span>{subject?.teacher.teacher_name}</span>
+          </div>
+        }
         <div className="buttons-box">
           <button
             type="primary"

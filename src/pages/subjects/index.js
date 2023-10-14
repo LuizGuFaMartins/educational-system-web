@@ -13,23 +13,42 @@ const Subject = () => {
   const [search, setSearch] = React.useState("");
   const [deleteId, setDeleteId] = React.useState(0);
   const student = useSelector(state => state.student)
+  const teacher = useSelector(state => state.teacher)
+  const login = useSelector(state => state.login)
 
   React.useEffect(() => {
     setSubjects([]);
     setFilteredSubjects([]);
-    api
-      .get("/subjects?include=[\"teachers\"]")
-      .then((res) => {
-        setSubjects(res.data);
-        setFilteredSubjects(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error?.response && error.response.status === 401) {
-          navigate("/login");
-          logout();
-        }
-      });
+
+    if (login.login_type === "STUDENT") {
+      api
+        .get("/subjects?include=[\"teachers\"]")
+        .then((res) => {
+          setSubjects(res.data);
+          setFilteredSubjects(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error?.response && error.response.status === 401) {
+            navigate("/login");
+            logout();
+          }
+        });
+    } else if (login.login_type === "TEACHER") {
+      api
+        .get(`/subjects?where={\"teacher_id\": ${teacher.teacher_id}}`)
+        .then((res) => {
+          setSubjects(res.data);
+          setFilteredSubjects(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error?.response && error.response.status === 401) {
+            navigate("/login");
+            logout();
+          }
+        });
+    }
   }, []);
 
   React.useEffect(() => {
@@ -49,7 +68,9 @@ const Subject = () => {
     setSearch(value);
     if (value !== "") {
       const filter = subjects.filter((subject) => {
-        subject.subject_name.toLowerCase().includes(value.toLowerCase());
+        if (subject.subject_name.toLowerCase().includes(value.toLowerCase())) {
+          return subject;
+        }
       });
       setFilteredSubjects(filter);
     } else {

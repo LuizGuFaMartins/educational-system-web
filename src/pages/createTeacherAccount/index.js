@@ -79,7 +79,7 @@ const CreateTeacherAccount = () => {
           if (error?.response?.status === 409) {
             toast.error("Já existe um usuário com este e-mail");
           } else {
-            toast.error("Não foi possível criar o usuário");
+            toast.error("Não foi possível cadastrar o usuário");
           }
         });
     }

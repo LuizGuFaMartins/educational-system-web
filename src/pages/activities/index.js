@@ -13,10 +13,12 @@ const Activity = () => {
   const [search, setSearch] = React.useState("");
   const [deleteId, setDeleteId] = React.useState(0);
   const student = useSelector(state => state.student)
+  const login = useSelector(state => state.login)
 
   React.useEffect(() => {
     setActivities([]);
     setFilteredSubjects([]);
+
     api
       .get(`/activities/${student?.student_id}`)
       .then((acts) => {
@@ -51,7 +53,9 @@ const Activity = () => {
     setSearch(value);
     if (value !== "") {
       const filter = activities.filter((activity) => {
-        activity.activity_name.toLowerCase().includes(value.toLowerCase());
+        if (activity.activity_name.toLowerCase().includes(value.toLowerCase())) {
+          return activity;
+        }
       });
       setFilteredSubjects(filter);
     } else {

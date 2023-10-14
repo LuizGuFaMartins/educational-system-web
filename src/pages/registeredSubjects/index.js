@@ -52,7 +52,9 @@ const RegisteredSubject = () => {
     setSearch(value);
     if (value !== "") {
       const filter = subjects.filter((subject) => {
-        subject.subject_name.toLowerCase().includes(value.toLowerCase());
+        if (subject.subject_name.toLowerCase().includes(value.toLowerCase())) {
+          return subject
+        }
       });
       setFilteredSubjects(filter);
     } else {
