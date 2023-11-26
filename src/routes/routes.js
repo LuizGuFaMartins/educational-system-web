@@ -5,14 +5,13 @@ import App from "../App";
 import Activity from "../pages/activities";
 import CreateAccount from "../pages/createAccount";
 import CreateActivity from "../pages/createActivity";
-import CreateTeacherAccount from "../pages/createTeacherAccount";
+import CreateCourse from "../pages/createCourse";
+import CreateSubject from "../pages/createSubject";
 import CreateUser from "../pages/createUser";
 import Login from "../pages/login";
 import Profile from "../pages/profile";
 import RegisteredSubject from "../pages/registeredSubjects";
 import Subject from "../pages/subjects";
-import CreateSubject from "../pages/createSubject";
-import CreateCourse from "../pages/createCourse";
 
 const Routes = createBrowserRouter([
   {
@@ -24,7 +23,6 @@ const Routes = createBrowserRouter([
       { path: "/nova-disciplina", element: <CreateSubject /> },
       { path: "/atividades", element: <Activity /> },
       { path: "/nova-atividade", element: <CreateActivity /> },
-      // { path: "/turmas", element: <Subject /> },
       { path: "/disciplinas", element: <Subject /> },
       { path: "/matriculas", element: <RegisteredSubject /> },
       { path: "/perfil", element: <Profile /> },
@@ -36,12 +34,7 @@ const Routes = createBrowserRouter([
   },
   {
     path: "/cadastro",
-    element:
-      process.env.REACT_APP_FLAVOR === "STUDENT" ? (
-        <CreateAccount />
-      ) : (
-        <CreateTeacherAccount />
-      ),
+    element: <CreateAccount />     
   },
 ]);
 

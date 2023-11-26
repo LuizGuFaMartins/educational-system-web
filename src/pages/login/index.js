@@ -11,8 +11,8 @@ import "./styles.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("farabello@gmail.com");
-  const [password, setPassword] = useState("123456789");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = React.useState(false);

@@ -20,7 +20,7 @@ const Activity = () => {
     setFilteredSubjects([]);
 
     api
-      .get(`/activities/${student?.student_id}`)
+      .get(`/activities/registered/${student?.student_id}`)
       .then((acts) => {
         setActivities(acts.data);
         setFilteredSubjects(acts.data);

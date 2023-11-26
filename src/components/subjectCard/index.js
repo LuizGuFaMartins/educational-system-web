@@ -25,7 +25,6 @@ const SubjectCard = ({ subject, student, setDeleteId }) => {
         student_id: student.student_id,
       })
       .then((res) => {
-        console.log(res);
         toast.success("Matrícula realizada com sucesso");
       })
       .catch((error) => {
@@ -66,13 +65,14 @@ const SubjectCard = ({ subject, student, setDeleteId }) => {
           </div>
         }
         <div className="buttons-box">
+        {login.login_type === "STUDENT" &&
           <button
             type="primary"
             onClick={showModal}
             className="btn-subject-card"
           >
             Fazer matrícula
-          </button>
+          </button>}
           <Modal
             title={null}
             open={isModalOpen}

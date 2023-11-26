@@ -58,54 +58,54 @@ const CreateAccount = () => {
       api
         .post(`/create-auth`, {
           login_name: name,
-          login_type: type,
+          login_type: "ADMIN",
           login_email: email,
           login_password: password,
         })
         .then((res) => {
           toast.success("Usuário cadastrado com sucesso");
 
-          api
-            .post(`/students`, {
-              login_name: name,
-              login_type: type,
-              login_email: email,
-              login_password: password,
-            })
-            .then((res) => {
-              toast.success("Usuário cadastrado com sucesso");
+          // api
+          //   .post(`/students`, {
+          //     login_name: name,
+          //     login_type: type,
+          //     login_email: email,
+          //     login_password: password,
+          //   })
+          //   .then((res) => {
+          //     toast.success("Usuário cadastrado com sucesso");
 
-              navigate("/login");
-            })
-            .catch((error) => {
-              console.log(error);
-              if (error?.response?.status === 409) {
-                toast.error("Já existe um usuário com este e-mail");
-              } else {
-                toast.error("Não foi possível cadastrar o usuário");
-              }
-            });
+          //     navigate("/login");
+          //   })
+          //   .catch((error) => {
+          //     console.log(error);
+          //     if (error?.response?.status === 409) {
+          //       toast.error("Já existe um usuário com este e-mail");
+          //     } else {
+          //       toast.error("Não foi possível cadastrar o usuário");
+          //     }
+          //   });
 
-          api
-            .post(`/teachers`, {
-              login_name: name,
-              login_type: type,
-              login_email: email,
-              login_password: password,
-            })
-            .then((res) => {
-              toast.success("Usuário cadastrado com sucesso");
+          // api
+          //   .post(`/teachers`, {
+          //     login_name: name,
+          //     login_type: type,
+          //     login_email: email,
+          //     login_password: password,
+          //   })
+          //   .then((res) => {
+          //     toast.success("Usuário cadastrado com sucesso");
 
-              navigate("/login");
-            })
-            .catch((error) => {
-              console.log(error);
-              if (error?.response?.status === 409) {
-                toast.error("Já existe um usuário com este e-mail");
-              } else {
-                toast.error("Não foi possível cadastrar o usuário");
-              }
-            });
+          //     navigate("/login");
+          //   })
+          //   .catch((error) => {
+          //     console.log(error);
+          //     if (error?.response?.status === 409) {
+          //       toast.error("Já existe um usuário com este e-mail");
+          //     } else {
+          //       toast.error("Não foi possível cadastrar o usuário");
+          //     }
+          //   });
 
           navigate("/login");
         })

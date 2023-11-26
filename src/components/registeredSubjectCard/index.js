@@ -19,7 +19,6 @@ const RegisteredSubjectCard = ({ subject, student, setDeleteId }) => {
         student_id: student.student_id,
       })
       .then((res) => {
-        console.log(res);
         toast.success("Matrícula cancelada com sucesso");
       })
       .catch((error) => {

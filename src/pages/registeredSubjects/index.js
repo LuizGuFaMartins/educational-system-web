@@ -19,7 +19,7 @@ const RegisteredSubject = () => {
     setFilteredSubjects([]);
     api
       .get(
-        `/subjects/${student?.student_id}`
+        `/subjects/registered/${student?.student_id}`
       )
       .then((res) => {
         setSubjects(res.data);
